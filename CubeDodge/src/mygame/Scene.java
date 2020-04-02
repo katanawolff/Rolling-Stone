@@ -6,6 +6,7 @@
 package mygame;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 
 
@@ -37,10 +38,11 @@ public class Scene {
     private void addTrees(TreeManager tm) {
         for(int i = 0; i <= 20; i++){
         map.attachChild(tm.createTree());
-            System.out.println(map.getChildren().size());
+            //System.out.println(map.getChildren().size());
         }
     }
-    public void moveMap(){
-        
+    public void moveMap(float tpf){
+        Vector3f v = map.getLocalTranslation();
+        map.setLocalTranslation(v.x, v.y, v.z + (tpf *3));
     }
 }

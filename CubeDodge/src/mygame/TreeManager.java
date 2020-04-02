@@ -43,7 +43,7 @@ public class TreeManager {
         topMat.setColor("Color", ColorRGBA.Green);
         treeTop.setMaterial(topMat);
         
-        System.out.println("Dome Complete");
+        //System.out.println("Dome Complete");
         
         Box stem = new Box(1.5f,4,1.5f);
         Geometry treeStem = new Geometry("Box", stem);
@@ -51,14 +51,14 @@ public class TreeManager {
         stemMat.setColor("Color", ColorRGBA.Brown);
         treeStem.setMaterial(stemMat);
         
-        System.out.println("Stem Complete");
+        //System.out.println("Stem Complete");
         
         tree.attachChild(treeTop);
         treeStem.setLocalTranslation(0, 3, -20);
         tree.attachChild(treeStem);
         treeTop.setLocalTranslation(0, 7,-20);
         
-        System.out.println("Tree Complete, attaching to node");
+        //System.out.println("Tree Complete, attaching to node");
         tree.setLocalTranslation((randomInt(-80,80)), 0, (randomInt(-100, -45)));
         return tree;
     }

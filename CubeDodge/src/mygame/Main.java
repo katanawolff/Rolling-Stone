@@ -30,8 +30,8 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         //flyCam.setEnabled(false);
-        //cam.setLocation(new Vector3f(0, 15, 3));
-        //cam.lookAtDirection(new Vector3f(0,0,0), new Vector3f(0,1,0));
+        cam.setLocation(new Vector3f(0, 5, 9));
+        cam.lookAtDirection(new Vector3f(0,0,0), new Vector3f(0,1,0));
         
         flyCam.setZoomSpeed(20);
         flyCam.setMoveSpeed(20);
@@ -39,7 +39,7 @@ public class Main extends SimpleApplication {
         Node map = new Node();
         Node playerSphere = new Node();
         
-        Sphere s = new Sphere(105,20,5);
+        Sphere s = new Sphere(105,20,3);
         Geometry pgeom = new Geometry("Sphere", s);
         Material pmat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         pmat.setColor("Color", ColorRGBA.Blue);
@@ -55,6 +55,7 @@ public class Main extends SimpleApplication {
         fl.setMaterial(flMat);
         map.attachChild(fl);
         rootNode.attachChild(map);
+        rootNode.attachChild(playerSphere);
         
         
         sc = new Scene(assetManager, map);
@@ -63,7 +64,8 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-        
+        sc.moveMap(tpf);
+        p.onAction(INPUT_MAPPING_EXIT, paused, tpf);
     }
 
     @Override
