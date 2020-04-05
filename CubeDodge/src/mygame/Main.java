@@ -30,20 +30,22 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         //flyCam.setEnabled(false);
-        cam.setLocation(new Vector3f(0, 5, 9));
-        cam.lookAtDirection(new Vector3f(0,0,0), new Vector3f(0,1,0));
+        cam.setLocation(new Vector3f(0, 5, 20));
         
         flyCam.setZoomSpeed(20);
         flyCam.setMoveSpeed(20);
 
         Node map = new Node();
         Node playerSphere = new Node();
+        Node treeNode = new Node();
         
         Sphere s = new Sphere(105,20,3);
         Geometry pgeom = new Geometry("Sphere", s);
         Material pmat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         pmat.setColor("Color", ColorRGBA.Blue);
         pgeom.setMaterial(pmat);
+        playerSphere.scale(.5f);
+        playerSphere.setLocalTranslation(0, -2.5f, 0);
         playerSphere.attachChild(pgeom);
         
         p = new Player(playerSphere, inputManager);
@@ -54,18 +56,26 @@ public class Main extends SimpleApplication {
         flMat.setColor("Color", ColorRGBA.White);
         fl.setMaterial(flMat);
         map.attachChild(fl);
+        
+        rootNode.attachChild(treeNode);
         rootNode.attachChild(map);
         rootNode.attachChild(playerSphere);
         
         
-        sc = new Scene(assetManager, map);
-        
+        sc = new Scene(assetManager, map, treeNode);
+
     }
 
     @Override
     public void simpleUpdate(float tpf) {
+        Vector3f v1 = p.sphere.getLocalTranslation();
+        Vector3f v2 = cam.getLocation();
+        Vector3f v3 = v1.subtract(v2);
         sc.moveMap(tpf);
-        p.onAction(INPUT_MAPPING_EXIT, paused, tpf);
+        p.update(tpf);
+        cam.lookAt(new Vector3f(v1.x, v1.y, v1.z - 240), new Vector3f(0, 1, 0));
+        cam.setLocation(new Vector3f(v1.x, v1.y + 5, v1.z + 20));
+        
     }
 
     @Override
