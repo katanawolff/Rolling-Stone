@@ -62,7 +62,7 @@ public class Main extends SimpleApplication {
         rootNode.attachChild(playerSphere);
         
         
-        sc = new Scene(assetManager, map, treeNode);
+        sc = new Scene(assetManager, map, treeNode, p);
 
     }
 
@@ -71,7 +71,7 @@ public class Main extends SimpleApplication {
         Vector3f v1 = p.sphere.getLocalTranslation();
         Vector3f v2 = cam.getLocation();
         Vector3f v3 = v1.subtract(v2);
-        sc.moveMap(tpf);
+        sc.update(tpf);
         p.update(tpf);
         cam.lookAt(new Vector3f(v1.x, v1.y, v1.z - 240), new Vector3f(0, 1, 0));
         cam.setLocation(new Vector3f(v1.x, v1.y + 5, v1.z + 20));

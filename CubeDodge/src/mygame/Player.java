@@ -69,5 +69,6 @@ public class Player implements ActionListener{
             //sphere.setLocalTranslation(v.x - tpf * speed, v.y, v.z);
             sphere.move(-1 * tpf * speed, 0, 0);
         }
+        
     }
 }
