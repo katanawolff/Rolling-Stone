@@ -45,21 +45,21 @@ public class TreeManager {
         
         //System.out.println("Dome Complete");
         
-        Box stem = new Box(1.5f,4,1.5f);
+        Box stem = new Box(1.5f, 7, 1.5f);
         Geometry treeStem = new Geometry("Box", stem);
         Material stemMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         stemMat.setColor("Color", ColorRGBA.Brown);
         treeStem.setMaterial(stemMat);
         
         //System.out.println("Stem Complete");
-        
+        treeTop.setLocalTranslation(0, 7, 0);
         tree.attachChild(treeTop);
-        treeStem.setLocalTranslation(0, 3, -20);
+        treeStem.setLocalTranslation(0, 0, 0);
         tree.attachChild(treeStem);
-        treeTop.setLocalTranslation(0, 7,-20);
+        
         
         //System.out.println("Tree Complete, attaching to node");
-        tree.setLocalTranslation((randomInt(-80,80)), 0, (randomInt(-100, -45)));
+        tree.setLocalTranslation((randomInt(-80,80)), 0, (randomInt(-100, -65)));
         return tree;
     }
     

@@ -1,6 +1,7 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -21,9 +22,10 @@ public class Main extends SimpleApplication {
 
     Scene sc;
     Player p;
+    static Main app;
 
     public static void main(String[] args) {
-        Main app = new Main();
+        app = new Main();
         app.start();
     }
 
@@ -39,12 +41,11 @@ public class Main extends SimpleApplication {
         Node playerSphere = new Node();
         Node treeNode = new Node();
         
-        Sphere s = new Sphere(105,20,3);
+        Sphere s = new Sphere(20,20,1);
         Geometry pgeom = new Geometry("Sphere", s);
         Material pmat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         pmat.setColor("Color", ColorRGBA.Blue);
         pgeom.setMaterial(pmat);
-        playerSphere.scale(.5f);
         playerSphere.setLocalTranslation(0, -2.5f, 0);
         playerSphere.attachChild(pgeom);
         
@@ -62,8 +63,17 @@ public class Main extends SimpleApplication {
         rootNode.attachChild(playerSphere);
         
         
-        sc = new Scene(assetManager, map, treeNode, p);
+        guiNode.detachAllChildren();
+        guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
+        BitmapText scoreText = new BitmapText(guiFont, false);
+        scoreText.setSize(guiFont.getCharSet().getRenderedSize());
+        scoreText.setLocalTranslation(300, scoreText.getLineHeight(), 0);
+        scoreText.setColor(ColorRGBA.Black);
+        guiNode.attachChild(scoreText);
+        
+        sc = new Scene(assetManager, map, treeNode, p, scoreText, app);
 
+        scoreText.setText("Current Score: ");
     }
 
     @Override

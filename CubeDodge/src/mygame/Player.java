@@ -36,7 +36,7 @@ public class Player implements ActionListener{
     private void setUpKeys(){
         inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_J));
         inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_K));
-        inputManager.addMapping("Pause", new KeyTrigger(KeyInput.KEY_SPACE));
+    //    inputManager.addMapping("Pause", new KeyTrigger(KeyInput.KEY_SPACE));
         inputManager.addListener(this, "Pause", "Right", "Left");
         System.out.println("Key mappings set.");
     }
@@ -44,14 +44,10 @@ public class Player implements ActionListener{
     
     @Override
     public void onAction(String name, boolean isPressed, float tpf) {
-        if (name.equals("Pause") && !isPressed) {
-            isRunning = !isRunning;
-            System.out.println("Game Paused");
-        }
-        if (name.equals("Right")) {
+        if (name.equals("Right") && isRunning) {
             right = isPressed;
         }
-        if(name.equals("Left")){
+        if(name.equals("Left") && isRunning){
             left = isPressed;
         }
     }
